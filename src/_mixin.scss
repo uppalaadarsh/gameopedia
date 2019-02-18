@@ -1,0 +1,6 @@
+@mixin overlay() {
+    border-top-left-radius: $ten;
+	border-top-right-radius: $ten;
+    border-bottom-left-radius: $ten;
+	border-bottom-right-radius: $ten;
+}

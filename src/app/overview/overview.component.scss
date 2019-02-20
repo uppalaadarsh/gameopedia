@@ -1,0 +1,57 @@
+@import '../../variables';
+
+.add-movies {
+    position: relative;
+    height: calc(100vh - 12vh);
+    .retrieve-image {
+        position: fixed;
+        top: 0;
+        z-index: -1;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        padding-bottom: 0px !important;
+        background: none !important; 
+    }
+    .thumbnail {
+        width: 100%;
+        padding: 20px;
+        margin: 0;
+        background-color: $white;
+        align-self: flex-end;
+        border-radius: 0px;  
+        a {
+            color: $black;
+        }
+        &:hover {
+            background-color: $white;  
+        }
+    }
+    %padding {
+        padding: 10px 20px;
+    }
+    #Details {
+        [class^="retrieve"] {
+            background: $orange; 
+            color: #fff;
+            border-radius: 50px;
+            margin: 22px;
+            @extend %padding;
+            span {
+                border-right: 1px solid lightgrey;
+                @extend %padding;
+                margin-right: 20px;
+            }
+        }
+    }
+}
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
+    background-color: $white;
+    border-bottom: 2px solid $orange;
+    color: $orange;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+.nav-pills {
+    border-bottom: 1px solid $orange;
+}

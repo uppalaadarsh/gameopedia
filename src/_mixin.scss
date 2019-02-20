@@ -4,3 +4,6 @@
     border-bottom-left-radius: $ten;
 	border-bottom-right-radius: $ten;
 }
+@mixin transition(){
+    transition: 1s ease all;
+}

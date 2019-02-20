@@ -1,0 +1,320 @@
+<form [formGroup]="modelForm" (ngSubmit)="onSubmit()">
+  <div class="modal fade" id="add" role="dialog" >
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header"> 
+          <h4 class="modal-title">Enter movie details:</h4>
+        </div>
+        <div class="modal-body"> 
+  
+          <div class="form-group">
+            <label>Enter Movie Name:</label>
+            <input type="text" formControlName="movieName" class="form-control" placeholder="Enter name" [(ngModel)]="moviename" 
+            [ngClass]="{ 'is-invalid': submitted && f.movieName.errors }" />
+            <div *ngIf="submitted && f.movieName.errors" class="text-danger">
+                <div *ngIf="f.movieName.errors.required">Moviename is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Enter Director Name:</label>
+            <input type="text" formControlName="directorName" class="form-control" placeholder="Enter name" [(ngModel)]="directorname" 
+            [ngClass]="{ 'is-invalid': submitted && f.directorName.errors }" />
+            <div *ngIf="submitted && f.directorName.errors" class="text-danger">
+                <div *ngIf="f.directorName.errors.required">Directorname is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Enter Cast Name:</label>
+            <input type="text" formControlName="castName" class="form-control" placeholder="Enter name" [(ngModel)]="castname" 
+            [ngClass]="{ 'is-invalid': submitted && f.castName.errors }" />
+            <div *ngIf="submitted && f.castName.errors" class=" text-danger">
+                <div *ngIf="f.castName.errors.required">Castname is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Enter Producer Name:</label>
+            <input type="text" formControlName="producerName" class="form-control" placeholder="Enter name" [(ngModel)]="producername" 
+            [ngClass]="{ 'is-invalid': submitted && f.producerName.errors }" />
+            <div *ngIf="submitted && f.producerName.errors" class="text-danger">
+                <div *ngIf="f.producerName.errors.required">Producername is required</div>
+            </div>
+          </div> 
+          <div class="form-group">
+            <label>Enter Release date Name:</label>
+            <input type="date" formControlName="releasedate" class="form-control" placeholder="Enter name" [(ngModel)]="releasedate" 
+            [ngClass]="{ 'is-invalid': submitted && f.releasedate.errors }" (change)="readUrl($event)" required />
+            <div *ngIf="submitted && f.releasedate.errors" class="text-danger">
+                <div *ngIf="f.releasedate.errors.required">Releasedate is required</div>
+            </div>
+          </div> 
+          <div class="form-group">
+            <label>Select Image:</label>
+            <input type="file" formControlName="imagepath" class="form-control" placeholder="Enter name" [(ngModel)]="imagepath" 
+            [ngClass]="{ 'is-invalid': submitted && f.imagepath.errors }" (change)="onFileChanged($event)" required />
+            <div *ngIf="submitted && f.imagepath.errors" class="text-danger">
+                <div *ngIf="f.imagepath.errors.required">imagepath is required</div>
+            </div>
+          </div> 
+          <div class="form-group">
+            <label>Enter your Links</label>
+            <input type="text" formControlName="link" class="form-control" placeholder="Enter name" [(ngModel)]="link" 
+            [ngClass]="{ 'is-invalid': submitted && f.link.errors }" required />
+            <div *ngIf="submitted && f.link.errors" class="text-danger">
+                <div *ngIf="f.link.errors.required">link is required</div>
+            </div>
+          </div> 
+          <div class="form-group">
+            <label>Enter distributor name:</label>
+            <input type="text" formControlName="distributor" class="form-control" placeholder="Enter name" [(ngModel)]="distributor" 
+            [ngClass]="{ 'is-invalid': submitted && f.distributor.errors }" required />
+            <div *ngIf="submitted && f.distributor.errors" class="text-danger">
+                <div *ngIf="f.distributor.errors.required">distributor is required</div>
+            </div>
+          </div> 
+          <div class="form-group">
+            <label>Enter Description:</label> <br>
+            <textarea name="" id="" cols="30" rows="5" class="form-control" formControlName="descriptionname" placeholder="Enter Description"
+             [(ngModel)]="descriptionname" [ngClass]="{ 'is-invalid': submitted && f.descriptionname.errors }" width="100%">
+            </textarea>
+            <div *ngIf="submitted && f.descriptionname.errors" class="text-danger">
+                <div *ngIf="f.descriptionname.errors.required">descriptionname is required</div>
+            </div>
+          </div>
+  
+          <div class="form-group">
+            <button [disabled]="loading" class="btn btn-primary">submit</button>
+            <button class="btn btn-primary" data-dismiss="modal" style="margin-left:20px;">close</button>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  </form>
+  
+  <div class="modal fade" id="login" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="form-group"> 
+          <label for="email">Email:</label>
+          <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+        </div> 
+        <div class="form-group">
+          <label for="pwd">Password:</label>
+          <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+        </div>
+        <div class="checkbox">
+          <label><input type="checkbox" name="remember"> Remember me</label>
+        </div>
+        <button type="submit" class="btn btn-primary" data-dismiss="modal">Submit</button>
+      </div>
+    </div>
+  </div>  
+
+<div class="thumbnail text-center" id="one"> 
+  <button class="btn" data-toggle="modal" data-target="#add">
+    <span class="glyphicon glyphicon-plus-sign"></span> 
+    clik here to add movies
+  </button>
+</div>
+<section class="add-movies">
+  
+  <div class="thumbnail" *ngFor="let data of characters | filter : searchText" (click)="nav()">
+    <a> 
+      <img [src]= "imagepath">
+      <div class="movie-name">
+        <h4 class="moviename">{{ data.moviename }} </h4> 
+        <p class="description">{{ data.descriptionname }} </p>
+        <p class="producername">{{ data.producername }} </p>
+        <p class="castname">{{ data.castname }}</p>
+        <p class="directorname">{{ data.directorname }}</p>
+        <p class="releasedate">{{ data.releasedate | date }}</p>
+        <p class="distributor">{{ data.distributor }}</p>
+        <p class="link">{{ data.link }}</p>
+      </div>
+    </a>
+  </div>
+
+<div class="thumbnail"> 
+  <a>
+    <img src="https://image.tmdb.org/t/p/original/lvjscO8wmpEbIfOEZi92Je8Ktlg.jpg" alt="Lights" >
+    <div class="movie-name">
+      <h4 class="moviename"> Glass </h4> 
+      <p class="description"> alita was born alita was born alita was born alita was born alita was born </p>
+      <p class="producername">Walson</p>
+      <p class="castname"> Rosa salazar </p>
+      <p class="directorname"> Robert </p>
+      <p class="releasedate"> Feb 14th 2019 </p>
+      <p class="distributor"> 20th Century Fox </p>
+      <p class="link"> https://en.wikipedia.org/wiki/Alita:_Battle_Angel </p>
+    </div>
+  </a>
+</div>
+<div class="thumbnail">
+  <a>
+    <img src="https://image.tmdb.org/t/p/original/aQXTw3wIWuFMy0beXRiZ1xVKtcf.jpg" alt="Lights" >
+    <div class="movie-name">
+      <h4 class="moviename"> Alita </h4> 
+      <p class="description"> alita was born alita was born alita was born alita was born alita was born </p>
+      <p class="producername">Walson</p>
+      <p class="castname"> Rosa salazar </p>
+      <p class="directorname"> Robert </p>
+      <p class="releasedate"> Feb 14th 2019 </p>
+      <p class="distributor"> 20th Century Fox </p>
+      <p class="link"> https://en.wikipedia.org/wiki/Alita:_Battle_Angel </p>
+    </div>
+  </a>
+</div>
+<div class="thumbnail">
+  <a>
+    <img src="https://image.tmdb.org/t/p/original/5A2bMlLfJrAfX9bqAibOL2gCruF.jpg" alt="Lights" >
+    <div class="movie-name">
+      <h4 class="moviename"> Aquamen </h4> 
+      <p class="description"> alita was born alita was born alita was born alita was born alita was born </p>
+      <p class="producername">Walson</p>
+      <p class="castname"> Rosa salazar </p>
+      <p class="directorname"> Robert </p>
+      <p class="releasedate"> Feb 14th 2019 </p>
+      <p class="distributor"> 20th Century Fox </p>
+      <p class="link"> https://en.wikipedia.org/wiki/Alita:_Battle_Angel </p>
+    </div>
+  </a>
+</div> 
+<div class="thumbnail">
+  <a>
+    <img src="https://image.tmdb.org/t/p/original/lvjscO8wmpEbIfOEZi92Je8Ktlg.jpg" alt="Lights" >
+    <div class="movie-name">
+      <h4 class="moviename"> Alita </h4> 
+      <p class="description"> alita was born alita was born alita was born alita was born alita was born </p>
+      <p class="producername">Walson</p>
+      <p class="castname"> Rosa salazar </p>
+      <p class="directorname"> Robert </p>
+      <p class="releasedate"> Feb 14th 2019 </p>
+      <p class="distributor"> 20th Century Fox </p>
+      <p class="link"> https://en.wikipedia.org/wiki/Alita:_Battle_Angel </p>
+    </div>
+  </a>
+</div> 
+<div class="thumbnail">
+  <a>
+    <img src="https://image.tmdb.org/t/p/original/5A2bMlLfJrAfX9bqAibOL2gCruF.jpg" alt="Lights" >
+    <div class="movie-name">
+      <h4 class="moviename"> Alita </h4> 
+      <p class="description"> alita was born alita was born alita was born alita was born alita was born </p>
+      <p class="producername">Walson</p>
+      <p class="castname"> Rosa salazar </p>
+      <p class="directorname"> Robert </p>
+      <p class="releasedate"> Feb 14th 2019 </p>
+      <p class="distributor"> 20th Century Fox </p>
+      <p class="link"> https://en.wikipedia.org/wiki/Alita:_Battle_Angel </p>
+    </div>
+  </a>
+</div> 
+<div class="thumbnail">
+  <a>
+    <img src="https://image.tmdb.org/t/p/original/aQXTw3wIWuFMy0beXRiZ1xVKtcf.jpg" alt="Lights" >
+    <div class="movie-name">
+      <h4 class="moviename"> Alita </h4> 
+      <p class="description"> alita was born alita was born alita was born alita was born alita was born </p>
+      <p class="producername">Walson</p>
+      <p class="castname"> Rosa salazar </p>
+      <p class="directorname"> Robert </p>
+      <p class="releasedate"> Feb 14th 2019 </p>
+      <p class="distributor"> 20th Century Fox </p>
+      <p class="link"> https://en.wikipedia.org/wiki/Alita:_Battle_Angel </p>
+    </div>
+  </a>
+</div> 
+<div class="thumbnail">
+    <a>
+      <img src="https://image.tmdb.org/t/p/original/lvjscO8wmpEbIfOEZi92Je8Ktlg.jpg" alt="Lights" >
+      <div class="movie-name">
+        <h4 class="moviename"> Alita </h4> 
+        <p class="description"> alita was born alita was born alita was born alita was born alita was born </p>
+        <p class="producername">Walson</p>
+        <p class="castname"> Rosa salazar </p>
+        <p class="directorname"> Robert </p>
+        <p class="releasedate"> Feb 14th 2019 </p>
+        <p class="distributor"> 20th Century Fox </p>
+        <p class="link"> https://en.wikipedia.org/wiki/Alita:_Battle_Angel </p>
+      </div>
+    </a>
+</div> 
+<div class="thumbnail">
+  <a>
+    <img src="https://image.tmdb.org/t/p/original/aQXTw3wIWuFMy0beXRiZ1xVKtcf.jpg" alt="Lights" >
+    <div class="movie-name">
+      <h4 class="moviename"> Alita </h4> 
+      <p class="description"> alita was born alita was born alita was born alita was born alita was born </p>
+      <p class="producername">Walson</p>
+      <p class="castname"> Rosa salazar </p>
+      <p class="directorname"> Robert </p>
+      <p class="releasedate"> Feb 14th 2019 </p>
+      <p class="distributor"> 20th Century Fox </p>
+      <p class="link"> https://en.wikipedia.org/wiki/Alita:_Battle_Angel </p>
+    </div>
+  </a>
+</div> 
+<div class="thumbnail">
+    <a>
+      <img src="https://image.tmdb.org/t/p/original/5A2bMlLfJrAfX9bqAibOL2gCruF.jpg" alt="Lights" >
+      <div class="movie-name">
+        <h4 class="moviename"> Alita </h4> 
+        <p class="description"> alita was born alita was born alita was born alita was born alita was born </p>
+        <p class="producername">Walson</p>
+        <p class="castname"> Rosa salazar </p>
+        <p class="directorname"> Robert </p>
+        <p class="releasedate"> Feb 14th 2019 </p>
+        <p class="distributor"> 20th Century Fox </p>
+        <p class="link"> https://en.wikipedia.org/wiki/Alita:_Battle_Angel </p>
+      </div>
+    </a>
+</div> 
+<div class="thumbnail">
+  <a>
+    <img src="https://image.tmdb.org/t/p/original/lvjscO8wmpEbIfOEZi92Je8Ktlg.jpg" alt="Lights" >
+    <div class="movie-name">
+      <h4 class="moviename"> Alita </h4> 
+      <p class="description"> alita was born alita was born alita was born alita was born alita was born </p>
+      <p class="producername">Walson</p>
+      <p class="castname"> Rosa salazar </p>
+      <p class="directorname"> Robert </p>
+      <p class="releasedate"> Feb 14th 2019 </p>
+      <p class="distributor"> 20th Century Fox </p>
+      <p class="link"> https://en.wikipedia.org/wiki/Alita:_Battle_Angel </p>
+    </div>
+  </a>
+</div> 
+<div class="thumbnail">
+    <a>
+      <img src="https://image.tmdb.org/t/p/original/5A2bMlLfJrAfX9bqAibOL2gCruF.jpg" alt="Lights" >
+      <div class="movie-name">
+        <h4 class="moviename"> Alita </h4> 
+        <p class="description"> alita was born alita was born alita was born alita was born alita was born </p>
+        <p class="producername">Walson</p>
+        <p class="castname"> Rosa salazar </p>
+        <p class="directorname"> Robert </p>
+        <p class="releasedate"> Feb 14th 2019 </p>
+        <p class="distributor"> 20th Century Fox </p>
+        <p class="link"> https://en.wikipedia.org/wiki/Alita:_Battle_Angel </p>
+      </div>
+    </a>
+</div> 
+<div class="thumbnail">
+  <a>
+    <img src="https://image.tmdb.org/t/p/original/aQXTw3wIWuFMy0beXRiZ1xVKtcf.jpg" alt="Lights" >
+    <div class="movie-name">
+      <h4 class="moviename"> Alita </h4> 
+      <p class="description"> alita was born alita was born alita was born alita was born alita was born </p>
+      <p class="producername">Walson</p>
+      <p class="castname"> Rosa salazar </p>
+      <p class="directorname"> Robert </p>
+      <p class="releasedate"> Feb 14th 2019 </p>
+      <p class="distributor"> 20th Century Fox </p>
+      <p class="link"> https://en.wikipedia.org/wiki/Alita:_Battle_Angel </p>
+    </div>
+  </a>
+</div> 
+
+</section>
+  

@@ -1,0 +1,47 @@
+<section class="add-movies">
+  <div class="thumbnail" *ngFor="let data of characters | filter : searchText" (click)="nav()">
+    <a>  
+      <img src= {{data.imagepath}} (change)="onFileChanged($event)" class="retrieve-image"> 
+      <ul class="nav nav-pills nav-justified">
+        <li class="active"><a href="#Details" data-toggle="tab">Details</a></li>
+        <li><a href="#Trailer" data-toggle="tab">Trailer</a></li>
+        <li><a href="#Reviews" data-toggle="tab">Reviews</a></li>
+        <li><a href="#Similar-movies" data-toggle="tab">Similar Movies</a></li>
+      </ul>
+      <div class="tab-content clearfix">
+        <div class="tab-pane active" id="Details">    
+          <div class="col-md-6">
+              <div class="col-md-6">
+                <div class="retrieve-moviename"><span>Movie </span> {{ data.moviename }} </div> 
+                <div class="retrieve-descriptionname"><span>description </span> {{ data.descriptionname }}</div>
+              </div>
+              <div class="col-md-6"> 
+                <div class="retrieve-castname"><span>Casting </span> {{ data.castname }}</div>
+                <div class="retrieve-producername"><span>Producer(s) </span> {{ data.producername }} </div>
+              </div>
+          </div>
+          <div class="col-md-6">
+            <div class="col-md-6">
+              <div class="retrieve-directorname"><span>Director(s) </span>{{ data.directorname }}</div>
+              <div class="retrieve-releasedate"><span>Release date </span> {{ data.releasedate | date }}</div>
+            </div>
+            <div class="col-md-6">
+              <div class="retrieve-distributor"> <span>Distributor(s) </span> {{ data.distributor }}</div>
+              <div class="retrieve-link"><span>link(s) </span> {{ data.link }}</div>  
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane" id="Trailer">
+          <h3>Trailer videos can be added here</h3>
+        </div>
+        <div class="tab-pane" id="Reviews">
+          <h3>Review can be added here</h3>
+        </div>
+        <div class="tab-pane" id="Similar-movies">
+          <h3>Similar-videos can be added here</h3>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+      

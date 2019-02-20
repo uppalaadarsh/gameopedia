@@ -1,0 +1,19 @@
+@import '../../variables'; 
+@import '../../mixin';
+
+#one {
+    border: none;   
+        .btn {
+            @include transition();
+            &:hover {
+                background-color: $orange;
+                color: $white; 
+                @include transition();
+        }
+    }
+}
+#login {
+    .modal-content {
+        padding: 20px;
+    }
+}
